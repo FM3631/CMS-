@@ -7,6 +7,7 @@ import router from './router/router.js'
 import VueRouter from 'vue-router'
 
 Vue.use(router)
+
 Vue.use(VueRouter)
 
 //引入axios
@@ -18,11 +19,11 @@ Vue.prototype.$axios = axios
 Vue.use(VueAxios, http)
 
 //引入vant库
-import { NavBar,Icon,Tabbar, TabbarItem,Swipe, SwipeItem,Lazyload,Tab, Tabs,Search,Tag,Form,Field,Button } from 'vant';
-
-
+import { NavBar,Icon,Tabbar, TabbarItem,Swipe, SwipeItem,Lazyload,Tab, Tabs,Search,Tag,Form,Field,Button,Uploader,Divider } from 'vant';
 
 // 全局注册
+Vue.use(Uploader);
+Vue.use(Divider);
 Vue.use(Button);
 Vue.use(Field);
 Vue.use(Form);
@@ -58,12 +59,23 @@ Vue.config.productionTip = false
 
 
 
+
 // 引入mint-ui
 // import Mint from 'mint-ui';
 // Vue.use(Mint);
 // import { Field } from 'mint-ui';
 // Vue.component(Field.name, Field);
 import store from './store/index.js'
+
+
+
+// 'mint-ui
+// import { Field ,Button, MessageBox } from 'mint-ui';
+import Mint from 'mint-ui';
+Vue.use(Mint);
+import '../node_modules/mint-ui/lib/style.css'
+
+
 
 
 new Vue({
