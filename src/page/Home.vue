@@ -9,15 +9,17 @@
           </router-link>
         </template>
         <template #right>
-          <van-icon name="manager" size="26" />
+          <router-link to="/Login" tag="span" style="margin-top:8px">
+            <van-icon name="manager" size="26" />
+          </router-link>
         </template>
       </van-nav-bar>
     </div>
+
     <!-- 中间部分 -->
     <router-view></router-view>
 
     <!-- 底部 -->
-
     <van-tabbar v-model="active">
       <van-tabbar-item name="home" icon="home-o">
         <router-link to="/HomeContainer">首页</router-link>
@@ -48,7 +50,7 @@ export default {
 .van-icon {
   color: #fff;
 }
-a{
+a {
   text-decoration: none;
   // color:#1989fa
 }
