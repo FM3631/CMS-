@@ -32,6 +32,7 @@
         :rules="[{ required: true, message: '请填写验证码' }]"
       />
       <button @click="getTestNum">点击获取验证码</button>
+
       <div style="margin: 16px;">
         <van-button round block type="info" native-type="submit">点击注册</van-button>
       </div>
@@ -42,6 +43,8 @@
   </div>
 </template>
 <script>
+import { getRegister } from '../../api/login.js'
+import { getTest } from '../../api/login.js'
 export default {
   data() {
     return {
@@ -54,24 +57,19 @@ export default {
   methods: {
     onSubmit(values) {
       console.log("submit", values);
-      this.getRegister()
+      getRegister(this.username,this.password,this.phoneNum,this.test)
+      .then(res=>{
+        console.log(res)
+      })
+      .catch()
     },
     getTestNum() {
-      this.getTest()
-    },
-    getRegister() {
-      const url = 
-      `http://59.111.92.205:8088/api/registry?Content-Type=application/x-www-form-urlencoded&loginName=${this.username}&userName=111111&password=${this.password}&phonenumber=${this.phoneNum}&code=${this.test}`;
-      this.$axios.post(url).then(res=>{
+      getTest(this.phoneNum)
+      .then(res=>{
         console.log(res)
-      });
+      })
+      .catch()
     },
-    getTest() {
-      const url = `http://59.111.92.205:8088/api/short-message/vcode/${this.phoneNum}`;
-      this.$axios.get(url).then(res => {
-        console.log(res);
-      });
-    }
   }
 };
 </script>

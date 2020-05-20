@@ -23,7 +23,8 @@ export default new Router({
         { path: '/HomeContainer', component: HomeContainer },
         { path:'/TypeInfo/:title/:content',component:TypeInfo,name:'toTypeInfo'},
         { path:'/SearchContainer',component:SearchContainer},
-        { path:'/SearchNewsList/:newsList',component:SearchNewsList,name:'toSearch'},
+        { path:'/SearchNewsList/:newsList',component:SearchNewsList},
+        { path:'/SearchNewsList/:value',component:SearchNewsList,name:'toSearch'},
 
         {path:'/login',component:Login,},
         {path:'/register',component:Register,},

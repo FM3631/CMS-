@@ -1,11 +1,4 @@
 import http from "./http.js";
-// 这个方法的功能：调用接口获取我们榜单列表
-// 输入： 
-// type：类型
-// size: 返回多少条数据
-// offset：偏移量
-// 输出：
-//     请求到的数据。
 
 //获取轮播图的接口
 function getLoopList(x=1,y=10) {
@@ -25,8 +18,12 @@ function getTypeList(x,y){
 }
 //获取新闻列表接口
 function getTypeContainerList(pageNum=0,pageSize=0,categoryId){
-    const typeContainerListUrl = `/api/cms/article/open/list?Content-Type=application/x-www-form-urlencoded&pageNum=${pageNum}&pageSize=${pageSize}&categoryId=${categoryId}`
-    return http.post(typeContainerListUrl);
+    const formData = new FormData();
+    formData.append('pageNum',pageNum)
+    formData.append('pageSize',pageSize)
+    formData.append('categoryId',categoryId)
+    const typeContainerListUrl = `/api/cms/article/open/list`
+    return http.post(typeContainerListUrl,formData);
 }
 //获取搜索接口
 function getSearchList(pageNum=0,pageSize=5,value){
@@ -37,12 +34,31 @@ function getSearchList(pageNum=0,pageSize=5,value){
     const searchListUrl = `/api/cms/article/open/list`
     return http.post(searchListUrl,formData);
 }
-// 这是一个普通导出
+//获取热门新闻接口
+function hotSearchList(pageNum=0,pageSize=8){
+    const formData = new FormData();
+    formData.append('pageNum',pageNum)
+    formData.append('pageSize',pageSize)
+    const hotSearchListUrl = `/api/cms/article/open/hot/list`
+    return http.post(hotSearchListUrl,formData);
+}
+//上传头像接口
+function changeImg(avatarfile){
+    const formData = new FormData();
+    formData.append('avatarfile',avatarfile)
+    const changeImgUrl = `/api/system/user/profile/update/avatar/nos`
+    return http.post(changeImgUrl,formData)
+}
+
+
+// 这是一个普通导出，默认导出只能导出一个
 export {
     getLoopList,
     getTypeList,
     getTypeContainerList,
-    getSearchList
+    getSearchList,
+    hotSearchList,
+    changeImg
 }
 
 // 默认导出只能导出一个

@@ -28,7 +28,7 @@
   </div>
 </template>
 <script>
-// import { getLogin } from "../../api/login";
+import { getLogin } from "../../api/login.js";
 export default {
   data() {
     return {
@@ -37,31 +37,15 @@ export default {
       loginList: []
     };
   },
-  // created() {
-  //   getLogin(this.username="kxr224",this.rememberMe=true,this.password=111111)
-  //   .then(res=>{
-  //   console.log(res)
-  //   })
-  // },
+  created() {},
   methods: {
     onSubmit(values) {
       console.log("submit", values);
-      // getLogin().then(res => {
-      //   console.log("11111111"+res);
-      // });
-      this.getLogin();
-    },
-    getLogin() {
-      const url = `http://59.111.92.205:8088/api/login?Content-Type=application/x-www-form-urlencoded&username=${this.username}&password=${this.password}&rememberMe=true`;
-      this.$axios.post(url).then(res => {
-        console.log(res);
-        this.loginList = res.data;
-        if (this.loginList.code == 0) {
-          console.log(this.loginList.msg);
-        } else {
-          console.log(this.loginList.msg);
-        }
-      });
+      getLogin(this.username, this.password)
+        .then(res => {
+          console.log(res);
+        })
+        .catch();
     }
   }
 };

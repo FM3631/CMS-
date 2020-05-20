@@ -1,38 +1,70 @@
 <template>
   <div>
+    <!-- 头像上传 -->
     <div class="adatar">
-      <img :src="adatar?adatar:require('../../assets/2.jpg')" alt />
-      <input type="file" name @change="fileChange" />
+      <!-- <img :src="adatar?adatar:require('../../assets/2.jpg')" alt />
+      <input type="file" name @change="fileChange" /> -->
       <!-- <button @click="submit">提交</button> -->
+        <van-uploader :after-read="afterRead" />
+
     </div>
+
     <div class="choos-button" style="    text-align: center;">
-        <router-link to="/mylove" tag="div"> <mt-button plain>我喜欢的</mt-button></router-link>
-        <router-link to="/personaldetails" tag="div"> <mt-button plain>我的信息</mt-button></router-link>
-     <router-link to="/changedetails" tag="div"> <mt-button plain>修改信息</mt-button></router-link>
+      <router-link to="/mylove" tag="div">
+        <mt-button plain>我喜欢的</mt-button>
+      </router-link>
+      <router-link to="/personaldetails" tag="div">
+        <mt-button plain>我的信息</mt-button>
+      </router-link>
+      <router-link to="/changedetails" tag="div">
+        <mt-button plain>修改信息</mt-button>
+      </router-link>
       <button style="margin-top: 10%;">退出登录</button>
     </div>
   </div>
 </template>
 <script src="../../node_modules/jquery/dist/jquery.js"></script>
 <script>
+import { changeImg } from "../../api/httpObj";
 export default {
   name: "adatar",
   data() {
     return {
-      adatar: ""
+      adatar: "",
+      file: ""
     };
   },
   methods: {
     //头像选择
-    fileChange(e) {
-      var that = this;
-      var file = e.target.files[0];
-      var reader = new FileReader();
-      reader.onload = function(e) {
-        that.adatar = e.target.result;
-      };
-      reader.readAsDataURL(file);
+    afterRead(file) {
+      
+      // 此时可以自行将文件上传至服务器
+      // console.log(file);
+      changeImg(file.file)
+      .then(res=>{
+        console.log(res)
+      })
+      .catch()
     },
+
+
+    /* fileChange(e) {
+      changeImg(this.file)
+        .then(res => {
+          console.log(111);
+          console.log(res);
+          var that = this;
+          var file = e.target.files[0];
+          var reader = new FileReader();
+          reader.onload = function(e) {
+            that.adatar = e.target.result;
+          };
+          reader.readAsDataURL(file);
+        })
+        .catch();
+    }, */
+
+
     submit() {
       var data = new FormData();
       data.appendTo("file", this.adatar);

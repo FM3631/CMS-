@@ -9,43 +9,62 @@
         @cancel="onCancel"
       />
     </form>
+    <div class="searchContainer">
+      <span class="history" v-for="(item,index) in historyList" :key="item.id">
+        <van-tag
+          v-if="show.primary"
+          closeable
+          size="medium"
+          type="primary"
+          @close="close(index)"
+        >{{item.content}}</van-tag>
+      </span>
 
-    <span class="history"  v-for="(item,index) in historyList" :key="item.id">
-      <van-tag
-        v-if="show.primary"
-        closeable
-        size="medium"
-        type="primary"
-        @close="close(index)"
-      >{{item.content}}</van-tag>
-    </span>
+      <div style="text-align:center;margin-top:20px;font-size:14px;" @click="clearHistory">清空历史记录</div>
 
-    <div style="text-align:center;margin-top:20px;font-size:14px" @click='clearHistory'>清空历史记录</div>
+      <div class="hotSearch">
+        <p>实时热搜</p>
+        <router-link
+          :to="{name:'toTypeInfo',params:{title:item.title,content:item.content}}"
+          v-for="item in hotSearchList"
+          :key="item.id"
+          style="margin: 8px;color:#9c27b0"
+          tag="p"
+        >{{item.title}}</router-link>
+      </div>
+    </div>
   </div>
 </template>
 <script>
 import { Toast } from "vant";
-
+import { hotSearchList } from "../../api/httpObj.js";
 export default {
   data() {
     return {
       value: "",
       historyList: [],
-
+      hotSearchList: [],
       //vant组件历史记录
       show: {
         primary: true,
-        success: true,
-      },
+        success: true
+      }
     };
   },
   created() {
     //搜索记录
 
     this.historyList = JSON.parse(localStorage.getItem("news") || "[]");
+    hotSearchList(1, 10)
+      .then(res => {
+        console.log(res);
+        this.hotSearchList = res.rows;
+      })
+      .catch();
   },
   methods: {
     onSearch(val) {
+      // this.$router.push({ name: "toSearch", params: { value: this.value } });
       this.$router.push({ name: "toSearch", params: { value: this.value } });
 
       var historyObj = { id: Date.now(), content: this.value };
@@ -60,23 +79,24 @@ export default {
     onCancel() {
       Toast("取消");
     },
-    
+
     //历史记录关闭方法
     close(index) {
       // console.log(index)
-      this.historyList.splice(index,1)
-      localStorage.setItem("news", JSON.stringify(this.historyList))
+      this.historyList.splice(index, 1);
+      localStorage.setItem("news", JSON.stringify(this.historyList));
     },
-    clearHistory(){
-      localStorage.clear()
-      this.historyList = []
+    clearHistory() {
+      localStorage.clear();
+      this.historyList = [];
     }
-
-    
   }
 };
 </script>
 <style lang="less" scoped>
+.searchContainer {
+  padding: 10px;
+}
 .container {
   display: flex;
   padding: 0 20px;
@@ -92,6 +112,10 @@ export default {
 .right {
   flex: 8;
   margin-left: 10px;
+  font-size: 14px;
+}
+.hotSearch {
+  margin-top: 20px;
   font-size: 14px;
 }
 </style>
