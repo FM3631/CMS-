@@ -13,10 +13,14 @@ import axios from 'axios'
 import VueAxios from 'vue-axios'
 import http from './api/http.js'
 Vue.prototype.$axios = axios
+
 Vue.use(VueAxios, http)
 
 //引入vant库
-import { NavBar,Icon,Tabbar, TabbarItem,Swipe, SwipeItem,Lazyload,Tab, Tabs  } from 'vant';
+import { NavBar,Icon,Tabbar, TabbarItem,Swipe, SwipeItem,Lazyload,Tab, Tabs,Search,Tag,  } from 'vant';
+// 全局注册
+Vue.use(Tag);
+Vue.use(Search);
 Vue.use(Tab);
 Vue.use(Tabs);
 Vue.use(Swipe);

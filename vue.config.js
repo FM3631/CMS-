@@ -11,9 +11,9 @@ module.exports = {
           target: 'http://59.111.92.205:8088', //对应自己的接口
           changeOrigin: true,
           ws: true,
-          pathRewrite: {
+          /* pathRewrite: {
             '^/api': ''
-          }
+          } */
         }
       }
      },

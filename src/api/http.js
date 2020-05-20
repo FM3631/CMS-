@@ -3,11 +3,9 @@ import axios from 'axios'
 // 使用自定义的配置文件发送请求
 const instance = axios.create({
     baseURL: '',
-    timeout: 3000,
+    timeout: 30000,
     headers: {
-        'X-Custom-Header': 'foobar',
-        'custome-header':'tianliangjiaoyu',
-        'Content-Type':'application/x-www-form-urlencoded'
+        'X-Requested-With':'XMLHttpRequest'
     }
 });
 instance.interceptors.request.use(function (config) {

@@ -9,24 +9,40 @@ import http from "./http.js";
 
 //获取轮播图的接口
 function getLoopList(x=1,y=10) {
-    const loopListUrl = `/api/api/cms/article/open/banner/list?Content-Type=application/x-www-form-urlencoded&pageNum=${x}&pageSize=${y}`
-    return http.post(loopListUrl);
+    const formData = new FormData();
+    formData.append('x',x)
+    formData.append('y',y)
+    const loopListUrl = `/api/cms/article/open/banner/list`
+    return http.post(loopListUrl,formData);
 }
 //获取类别的接口
 function getTypeList(x,y){
-    const typeListUrl = `/api/api/cms/category/open/list?Content-Type=application/x-www-form-urlencoded&pageNum=${x}&pageSize=${y}`
-    return http.post(typeListUrl);
+    const formData = new FormData();
+    formData.append('x',x)
+    formData.append('y',y)
+    const typeListUrl = `/api/cms/category/open/list`
+    return http.post(typeListUrl,formData);
 }
-//获取类别中的内容接口
+//获取新闻列表接口
 function getTypeContainerList(pageNum=0,pageSize=0,categoryId){
-    const typeContainerLis = `/api/api/cms/article/open/list?Content-Type=application/x-www-form-urlencoded&pageNum=${pageNum}&pageSize=${pageSize}&categoryId=${categoryId}`
-    return http.post(typeContainerLis);
+    const typeContainerListUrl = `/api/cms/article/open/list?Content-Type=application/x-www-form-urlencoded&pageNum=${pageNum}&pageSize=${pageSize}&categoryId=${categoryId}`
+    return http.post(typeContainerListUrl);
+}
+//获取搜索接口
+function getSearchList(pageNum=0,pageSize=5,value){
+    const formData = new FormData();
+    formData.append('pageNum',pageNum)
+    formData.append('pageSize',pageSize)
+    formData.append('title',value)
+    const searchListUrl = `/api/cms/article/open/list`
+    return http.post(searchListUrl,formData);
 }
 // 这是一个普通导出
 export {
     getLoopList,
     getTypeList,
-    getTypeContainerList
+    getTypeContainerList,
+    getSearchList
 }
 
 // 默认导出只能导出一个
