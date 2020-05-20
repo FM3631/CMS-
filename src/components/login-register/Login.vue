@@ -21,7 +21,7 @@
       <div style="margin: 16px;">
         <van-button round block type="info" native-type="submit">快速登录</van-button>
         <router-link to="/register">
-          <span>还没有账号？点击注册</span>
+          <span class="span2">还没有账号？点击注册</span>
         </router-link>
       </div>
     </van-form>
@@ -50,6 +50,7 @@ export default {
       //   console.log("11111111"+res);
       // });
       this.getLogin();
+      this.$router.push('/HomeContainer')
     },
     getLogin() {
       const url = `http://59.111.92.205:8088/api/login?Content-Type=application/x-www-form-urlencoded&username=${this.username}&password=${this.password}&rememberMe=true`;
@@ -58,6 +59,7 @@ export default {
         this.loginList = res.data;
         if (this.loginList.code == 0) {
           console.log(this.loginList.msg);
+          // alert(this.loginList.msg)
         } else {
           console.log(this.loginList.msg);
         }
@@ -67,4 +69,16 @@ export default {
 };
 </script>
 <style scoped>
+ .van-field {
+   padding: 20px;
+ }
+ h3 {
+   text-align: center;
+ }
+ .span2{
+   
+   display: inline-block;
+   padding: 10px;
+   font-size: 13px;
+ }
 </style>
