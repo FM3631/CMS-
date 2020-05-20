@@ -31,14 +31,16 @@
         placeholder="验证码"
         :rules="[{ required: true, message: '请填写验证码' }]"
       />
-      <button @click="getTestNum">点击获取验证码</button>
+
+
+      <button  class="but1" @click="getTestNum"><span>点击获取验证码</span></button>
 
       <div style="margin: 16px;">
         <van-button round block type="info" native-type="submit">点击注册</van-button>
       </div>
     </van-form>
     <router-link to="/login">
-      <span>已有账号，快速登录！</span>
+      <span class="span3">已有账号，快速登录！</span>
     </router-link>
   </div>
 </template>
@@ -74,8 +76,22 @@ export default {
 };
 </script>
 <style scoped>
-button {
-  /* background-color:rgb(255, 251, 0); */
-  /* color: aliceblue; */
+.but1 {
+  padding: 10px;
+  font-size: 14px;
+  border: none;
+  background-color:#fff;
+  color: blue;
+  float: right;
+}
+.span3{
+  font-size: 13px;
+  padding: 20px;
+}
+span :hover{
+  color: black;
+}
+h3 {
+  text-align: center;
 }
 </style>

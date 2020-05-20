@@ -22,12 +22,14 @@
     <!-- 底部 -->
     <van-tabbar v-model="active">
       <van-tabbar-item name="home" icon="home-o">
-        <router-link to="/HomeContainer">首页</router-link>
+        <router-link to="/HomeContainer" tag="span">首页</router-link>
       </van-tabbar-item>
 
-      <van-tabbar-item name="search" icon="orders-o">评论</van-tabbar-item>
+      <van-tabbar-item name="search" icon="orders-o">
+        <router-link to="/hotmusic" tag="span">热门音频</router-link>
+        </van-tabbar-item>
       <van-tabbar-item name="friends" icon="friends-o">
-        <router-link to="/Mycontaner">我的</router-link>
+        <router-link to="/Mycontaner" tag="span">我的</router-link>
       </van-tabbar-item>
       <van-tabbar-item name="setting" icon="setting-o">联系我们</van-tabbar-item>
     </van-tabbar>
@@ -55,9 +57,5 @@ export default {
 }
 .van-icon {
   color: #fff;
-}
-a {
-  text-decoration: none;
-  // color:#1989fa
 }
 </style>
