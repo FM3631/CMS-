@@ -50,6 +50,17 @@ function changeImg(avatarfile){
     return http.post(changeImgUrl,formData)
 }
 
+//详细信息接口
+function getInfo(loginName,phonenumber,avatar,userName=111) {
+    const formData = new FormData();
+    formData.append('loginName', loginName)
+    formData.append('phonenumber', phonenumber)
+    formData.append('avatar', avatar)
+    formData.append('userName', userName)
+    const getInfoUrl = `/api/login-user/info`
+    return http.get(getInfoUrl, formData);
+}
+
 
 // 这是一个普通导出，默认导出只能导出一个
 export {
@@ -58,7 +69,8 @@ export {
     getTypeContainerList,
     getSearchList,
     hotSearchList,
-    changeImg
+    changeImg,
+    getInfo
 }
 
 // 默认导出只能导出一个

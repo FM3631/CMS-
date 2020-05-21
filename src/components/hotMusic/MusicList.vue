@@ -5,7 +5,7 @@
       
         <li v-for="item in muisicList" :key="item.id">
 
-          <router-link :to="'/playmusic/'+item.id">
+          <router-link :to="'/playmusic/'+item.id" tag="span">
           <div class="div1">
             <img :src="item.cover" alt />
           </div>

@@ -2,23 +2,30 @@
   <div class="person-box">
     <div>
       <ul>
-        <li>昵称：</li>
-        <li>邮箱：</li>
-        <li>电话：</li>
-        <li>性别：</li>
-        <li>身份：</li>
+        <li>昵称：{{loginName}}</li>
+        <li>电话：{{phonenumber}}</li>
       </ul>
     </div>
   </div>
 </template>
 <script>
+import { getInfo } from '../../api/httpObj.js'
 export default {
   components: {},
   data() {
-    return {};
+    return {
+      loginName:'',
+      phonenumber:'',
+    };
   },
    created() {
-       
+       getInfo()
+      .then(res=>{
+        console.log(res)
+        this.loginName = res.data.loginName
+        this.phonenumber = res.data.phonenumber
+      })
+      .catch()
    }, 
   methods: {
       

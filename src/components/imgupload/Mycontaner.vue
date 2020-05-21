@@ -2,16 +2,19 @@
   <div>
     <!-- 头像上传 -->
     <div class="adatar">
-      <!-- <img :src="adatar?adatar:require('../../assets/2.jpg')" alt />
-      <input type="file" name @change="fileChange" /> -->
-      <!-- <button @click="submit">提交</button> -->
-        <van-uploader :after-read="afterRead" />
+      <!-- <img :src="avatar" alt />
+      <van-uploader :after-read="afterRead" />-->
 
+      <van-uploader :after-read="afterRead">
+        <img :src="avatar" alt />
+      </van-uploader>
+      <p style="font-size:12px; margin:0;">点击图片更换头像</p>
     </div>
+
 
     <div class="choos-button" style="    text-align: center;">
       <router-link to="/mylove" tag="div">
-        <mt-button plain>我喜欢的</mt-button>
+        <mt-button plain>我的喜欢</mt-button>
       </router-link>
       <router-link to="/personaldetails" tag="div">
         <mt-button plain>我的信息</mt-button>
@@ -23,60 +26,74 @@
     </div>
   </div>
 </template>
-<script src="../../node_modules/jquery/dist/jquery.js"></script>
 <script>
-import { changeImg } from "../../api/httpObj";
+import { changeImg } from "../../api/httpObj.js";
+import { getInfo } from "../../api/httpObj.js";
+import { Dialog } from 'vant';
 export default {
   name: "adatar",
   data() {
     return {
-      adatar: "",
-      file: ""
+      avatar: "",
+      show: true
     };
   },
+  created() {
+    getInfo()
+      .then(res => {
+        console.log(res);
+        this.avatar = res.data.avatar;
+      })
+      .catch();
+  },
+
   methods: {
     //头像选择
     afterRead(file) {
-      
       // 此时可以自行将文件上传至服务器
-      // console.log(file);
+      console.log(file);
       changeImg(file.file)
-      .then(res=>{
-        console.log(res)
-      })
-      .catch()
-    },
-
-
-    /* fileChange(e) {
-      changeImg(this.file)
         .then(res => {
-          console.log(111);
           console.log(res);
-          var that = this;
-          var file = e.target.files[0];
-          var reader = new FileReader();
-          reader.onload = function(e) {
-            that.adatar = e.target.result;
-          };
-          reader.readAsDataURL(file);
+          /* getInfo()
+            .then(res => {
+              console.log(res);
+              this.avatar = res.data.avatar;
+            }) */
+          // .catch();
+        })
+        .then(getInfo)
+        .then(res => {
+          this.avatar = res.data.avatar;
         })
         .catch();
-    }, */
-
-
-    submit() {
-      var data = new FormData();
-      data.appendTo("file", this.adatar);
-      $ajax({
-        type: "POST",
-        data: data,
-        processData: false, //processData 默认为false，当设置为true的时候,jquery ajax 提交的时候不会序列化 data，而是直接使用data
-        contentType: false,
-        success: function(res) {},
-        error: function(err) {}
-      });
     }
+
+    //确认 取消操作
+  },
+
+  components: {
+    [Dialog.Component.name]: Dialog.Component
+  },
+  computed:{
+    changeCode(){
+        return this.$store.state.code
+    }
+  },
+  mounted() {
+    Dialog
+      .confirm({
+        title: "您还没有登陆，请登录",
+        // message: "弹窗内容"
+      })
+      .then(() => {
+        // on confirm
+        if(this.$store.state.code == 0){this.show = false}
+        this.$router.push('/login')
+      })
+      .catch(() => {
+        // on cancel
+      });
   }
 };
 </script>
@@ -100,9 +117,8 @@ button {
 .adatar {
   position: relative;
   margin: auto;
-  margin-top: 20%;
+  margin-top: 8%;
   width: 100px;
-  height: 100px;
   img {
     object-fit: cover;
     border-radius: 50%;

@@ -41,7 +41,7 @@ export default {
 </script>
 <style scoped>
 .body {
-  margin-top: 10px;
+  padding: 0 20px;
 }
 video{
   object-fit:fill;
