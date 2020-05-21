@@ -32,13 +32,18 @@
           tag="p"
         >{{item.title}}</router-link>
       </div>
+      <Footer></Footer>
     </div>
   </div>
 </template>
 <script>
 import { Toast } from "vant";
 import { hotSearchList } from "../../api/httpObj.js";
+import Footer from '../homecontainer/Footer.vue'   
 export default {
+  components:{
+        Footer
+    },
   data() {
     return {
       value: "",
@@ -77,7 +82,7 @@ export default {
       Toast(val);
     },
     onCancel() {
-      Toast("取消");
+      this.$router.go(-1)
     },
 
     //历史记录关闭方法

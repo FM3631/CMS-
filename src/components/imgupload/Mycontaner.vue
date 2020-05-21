@@ -11,10 +11,9 @@
       <p style="font-size:12px; margin:0;">点击图片更换头像</p>
     </div>
 
-
     <div class="choos-button" style="    text-align: center;">
-      <router-link to="/mylove" tag="div">
-        <mt-button plain>我的喜欢</mt-button>
+      <router-link to="/MyCollect" tag="div">
+        <mt-button plain>我的收藏</mt-button>
       </router-link>
       <router-link to="/personaldetails" tag="div">
         <mt-button plain>我的信息</mt-button>
@@ -24,12 +23,14 @@
       </router-link>
       <button style="margin-top: 10%;">退出登录</button>
     </div>
+    <Footer></Footer>
   </div>
 </template>
 <script>
 import { changeImg } from "../../api/httpObj.js";
 import { getInfo } from "../../api/httpObj.js";
-import { Dialog } from 'vant';
+import Footer from "../homecontainer/Footer.vue";
+import { Dialog } from "vant";
 export default {
   name: "adatar",
   data() {
@@ -73,27 +74,33 @@ export default {
   },
 
   components: {
-    [Dialog.Component.name]: Dialog.Component
+    [Dialog.Component.name]: Dialog.Component,
+    Footer
   },
-  computed:{
-    changeCode(){
-        return this.$store.state.code
+  computed: {
+    isLogin() {
+      return this.$store.state.isLogin;
+    },
+    loginPromise() {
+      return this.$store.state.loginPromise;
     }
   },
   mounted() {
-    Dialog
-      .confirm({
-        title: "您还没有登陆，请登录",
-        // message: "弹窗内容"
-      })
-      .then(() => {
-        // on confirm
-        if(this.$store.state.code == 0){this.show = false}
-        this.$router.push('/login')
-      })
-      .catch(() => {
-        // on cancel
-      });
+    this.loginPromise.then(() => {
+      if (!this.isLogin) {
+        Dialog.confirm({
+          title: "您还没有登陆，请登录"
+          // message: "弹窗内容"
+        })
+          .then(() => {
+            // on confirm
+            this.$router.push("/login");
+          })
+          .catch(() => {
+            // on cancel
+          });
+      }
+    });
   }
 };
 </script>

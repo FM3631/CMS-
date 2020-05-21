@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <!-- 顶部header -->
-    <div class="header">
+    <!-- <div class="header">
       <van-nav-bar title="看天下">
         <template #left>
           <router-link to="/SearchContainer" tag="span" style="margin-top:8px">
@@ -14,7 +14,7 @@
           </router-link>
         </template>
       </van-nav-bar>
-    </div>
+    </div> -->
 
     <!-- 中间部分 -->
     <router-view></router-view>
@@ -37,12 +37,25 @@
 </template>
 
 <script>
+import { getInfo } from '../api/httpObj.js'
 export default {
   name: "App",
   data() {
     return {
       active: "home"
     };
+  },
+  created(){
+    let loginPromise = 
+    getInfo()
+    .then(res=>{
+      // console.log(res)
+      if(res.code == 0){
+        this.$store.commit('changeIsLogin',{isLogin:true})
+      }
+    })
+    .catch()
+    this.$store.commit('changeLoginPromise',{loginPromise:loginPromise})
   },
   methods: {}
 };

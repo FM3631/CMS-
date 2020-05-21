@@ -1,11 +1,13 @@
 <template>
   <div class="body">
     <video :src="this.mvList.url" controls="controls" ></video>
+    <Footer></Footer>
   </div>
 </template>
 <script>
+
 export default {
-  components: {},
+  
   data() {
     return {
       mvList:[],

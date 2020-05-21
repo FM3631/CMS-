@@ -15,15 +15,17 @@
             <span class="span3">歌手:{{item.artistName}}</span>
           </div>
           </router-link>
-
         </li>
-      
-      <router-view></router-view>
+        <Footer></Footer>
     </ul>
   </div>
 </template>
 <script>
+import Footer from '../homecontainer/Footer.vue'
 export default {
+  components: {
+    Footer
+  },
   data() {
     return {
       muisicList:[]

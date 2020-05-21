@@ -1,6 +1,6 @@
 <template>
   <div>
-    
+    <Header></Header>
     <!-- 轮播图 -->
     <div class="loop">
       <van-swipe :autoplay="3000">
@@ -18,17 +18,21 @@
         </van-tab>
     </van-tabs>
 
-    
+    <!-- <Footer></Footer> -->
     
   </div>
 </template>
 <script>
+import Header from './Header.vue'
+// import Footer from './Footer.vue'
 import TypeContainer from "../homeChildren/TypeContainer.vue";
 import { getLoopList } from "../../api/httpObj.js";
 import { getTypeList } from "../../api/httpObj.js";
 export default {
   components: {
-    TypeContainer
+    Header,
+    // Footer,
+    TypeContainer,
   },
   data() {
     return {

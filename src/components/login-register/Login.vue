@@ -44,7 +44,7 @@ export default {
       getLogin(this.username, this.password)
         .then(res => {
           console.log(res);
-          this.$store.commit('changeCode')
+          
         })
         .catch();
       this.$router.push("/HomeContainer");

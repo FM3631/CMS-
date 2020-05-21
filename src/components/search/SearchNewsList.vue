@@ -1,5 +1,6 @@
 <template>
   <div>
+    <Header></Header>
     <router-link
       :to="{name:'toTypeInfo',params:{title:item.title,content:item.content}}"
       class="container"
@@ -18,23 +19,27 @@
   </div>
 </template>
 <script>
-import { getSearchList } from '../../api/httpObj.js'
+import { getSearchList } from "../../api/httpObj.js";
+import Header from '../homecontainer/Header.vue'
 export default {
+  components:{
+    Header
+  },
   data() {
     return {
-        newsList:[],
-        historyList:[]
+      newsList: [],
+      historyList: []
     };
   },
-  created(){
-        console.log(this.$route.params.value)
-        getSearchList(1,5,this.$route.params.value)
-        .then(res=>{
-            console.log(res)
-            this.newsList = res.rows
-        })
-        .catch()
-    }
+  created() {
+    console.log(this.$route.params.value);
+    getSearchList(1, 5, this.$route.params.value)
+      .then(res => {
+        console.log(res);
+        this.newsList = res.rows;
+      })
+      .catch();
+  }
 };
 </script>
 <style lang="less" scoped>

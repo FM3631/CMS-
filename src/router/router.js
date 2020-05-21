@@ -14,7 +14,7 @@ import MusicList from '../components/hotMusic/MusicList.vue'
 import PlayMusic from '../components/hotMusic/PlayMusic.vue'
 
 import Mycontaner from '../components/imgupload/Mycontaner.vue'
-import mylove from '../components/mycenter/Mylove.vue'
+import MyCollect from '../components/mycenter/MyCollect.vue'
 import personaldetails from '../components/mycenter/Personaldetails.vue'
 import changedetails from '../components/mycenter/Changedetails.vue'
 
@@ -22,7 +22,7 @@ export default new Router({
     routes: [
         { path: '/', redirect: '/HomeContainer' },
         { path: '/HomeContainer', component: HomeContainer },
-        { path:'/TypeInfo/:title/:content',component:TypeInfo,name:'toTypeInfo'},
+        { path:'/TypeInfo/:title',component:TypeInfo,name:'toTypeInfo'},
         { path:'/SearchContainer',component:SearchContainer},
         { path:'/SearchNewsList/:newsList',component:SearchNewsList},
         { path:'/SearchNewsList/:value',component:SearchNewsList,name:'toSearch'},
@@ -33,7 +33,7 @@ export default new Router({
         {path:'/playmusic/:id',component:PlayMusic,},
 
         { path: '/Mycontaner', component: Mycontaner },
-        { path: '/mylove', component: mylove },
+        { path: '/MyCollect', component: MyCollect },
         { path: '/personaldetails', component: personaldetails },
         { path: '/changedetails', component: changedetails },
     ]

@@ -4,11 +4,15 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state:{
-    code:''
+    isLogin:false,
+    loginPromise:null
   },
   mutations:{
-    changeCode(state,code){
-      state.code = code
+    changeIsLogin(state,{isLogin}){
+      state.isLogin = isLogin
+    },
+    changeLoginPromise(state,{loginPromise}){
+      state.loginPromise = loginPromise
     }
   },
   actions:{}

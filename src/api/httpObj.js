@@ -51,17 +51,24 @@ function changeImg(avatarfile){
 }
 
 //详细信息接口
-function getInfo(loginName,phonenumber,avatar,userName=111) {
-    const formData = new FormData();
-    formData.append('loginName', loginName)
-    formData.append('phonenumber', phonenumber)
-    formData.append('avatar', avatar)
-    formData.append('userName', userName)
+function getInfo() {
+    
     const getInfoUrl = `/api/login-user/info`
-    return http.get(getInfoUrl, formData);
+    return http.get(getInfoUrl);
 }
 
-
+//收藏文章接口
+function collectState(articleId) {
+    
+    const collectStatefoUrl = `/api/cms/collect/collect/article/${articleId}`
+    return http.get(collectStatefoUrl);
+}
+//收藏文章列表接口
+function collectStateList() {
+    
+    const collectStateListUrl = `/api/cms/article/collect/list`
+    return http.get(collectStateListUrl);
+}
 // 这是一个普通导出，默认导出只能导出一个
 export {
     getLoopList,
@@ -70,7 +77,9 @@ export {
     getSearchList,
     hotSearchList,
     changeImg,
-    getInfo
+    getInfo,
+    collectState,
+    collectStateList
 }
 
 // 默认导出只能导出一个
