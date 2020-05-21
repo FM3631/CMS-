@@ -1,20 +1,19 @@
 <template>
   <div>
-    11
+    
   </div>
 </template>
 <script>
-
 export default {
   components: {},
   data() {
     return {
+      // show: true
     };
   },
- 
+
   methods: {}
 };
 </script>
 <style scoped>
-
 </style>

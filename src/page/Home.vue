@@ -27,7 +27,7 @@
 
       <van-tabbar-item name="search" icon="orders-o">评论</van-tabbar-item>
       <van-tabbar-item name="friends" icon="friends-o">
-         <router-link to="/Mycontaner">我的</router-link>
+         <router-link to="/Mycontaner" tag="div">我的</router-link>
         </van-tabbar-item>
       <van-tabbar-item name="setting" icon="setting-o">联系我们</van-tabbar-item>
     </van-tabbar>

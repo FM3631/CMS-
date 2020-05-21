@@ -17,6 +17,7 @@ import mylove from '../components/mycenter/Mylove.vue'
 import personaldetails from '../components/mycenter/Personaldetails.vue'
 import changedetails from '../components/mycenter/Changedetails.vue'
 
+
 export default new Router({
     routes: [
         { path: '/', redirect: '/HomeContainer' },

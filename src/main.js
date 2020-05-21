@@ -19,9 +19,11 @@ Vue.prototype.$axios = axios
 Vue.use(VueAxios, http)
 
 //引入vant库
-import { NavBar,Icon,Tabbar, TabbarItem,Swipe, SwipeItem,Lazyload,Tab, Tabs,Search,Tag,Form,Field,Button,Uploader,Divider } from 'vant';
+import { NavBar, Icon, Dialog, Tabbar, TabbarItem, Swipe, SwipeItem, Lazyload, Tab, Tabs, Search, Tag, Form, Field, Button, Uploader, Divider, ActionSheet } from 'vant';
 
-// 全局注册
+
+Vue.use(Dialog);
+Vue.use(ActionSheet);
 Vue.use(Uploader);
 Vue.use(Divider);
 Vue.use(Button);
