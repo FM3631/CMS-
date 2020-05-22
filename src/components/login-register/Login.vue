@@ -9,6 +9,13 @@
         placeholder="用户名"
         :rules="[{ required: true, message: '请填写用户名' }]"
       />
+      <!-- <van-field
+        v-model="nicheng"
+        name="昵称"
+        label="昵称"
+        placeholder="昵称"
+        :rules="[{ required: true, message: '请填写用昵称' }]"
+      /> -->
       <van-field
         v-model="password"
         type="password"
@@ -34,6 +41,7 @@ export default {
     return {
       username: "",
       password: "",
+
       loginList: []
     };
   },
@@ -55,6 +63,7 @@ export default {
 <style scoped>
 .van-field {
   padding: 20px;
+  color: rgb(49, 40, 35);
 }
 h3 {
   text-align: center;

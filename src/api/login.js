@@ -11,7 +11,7 @@ function getLogin(username, password,rememberMe=true) {
     return http.post(getLoginUrl,formData);
 }
 //注册接口
-function getRegister(loginName,password,phonenumber,code,userName=111){
+function getRegister(loginName,password,phonenumber,code,userName){
     const formData = new FormData();
     formData.append("loginName",loginName)
     formData.append("password",password)

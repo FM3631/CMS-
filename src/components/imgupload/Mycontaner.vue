@@ -2,9 +2,6 @@
   <div>
     <!-- 头像上传 -->
     <div class="adatar">
-      <!-- <img :src="avatar" alt />
-      <van-uploader :after-read="afterRead" />-->
-
       <van-uploader :after-read="afterRead">
         <img :src="avatar" alt />
       </van-uploader>
@@ -21,13 +18,13 @@
       <router-link to="/changedetails" tag="div">
         <mt-button plain>修改信息</mt-button>
       </router-link>
-      <button style="margin-top: 10%;">退出登录</button>
+      <button style="margin-top: 10%;" @click="exit">退出登录</button>
     </div>
     <Footer></Footer>
   </div>
 </template>
 <script>
-import { changeImg } from "../../api/httpObj.js";
+import { changeImg, logOut } from "../../api/httpObj.js";
 import { getInfo } from "../../api/httpObj.js";
 import Footer from "../homecontainer/Footer.vue";
 import { Dialog } from "vant";
@@ -36,7 +33,7 @@ export default {
   data() {
     return {
       avatar: "",
-      show: true
+      show: false
     };
   },
   created() {
@@ -47,8 +44,15 @@ export default {
       })
       .catch();
   },
-
   methods: {
+    exit(){
+      logOut().then(res=>{
+        console.log(res)
+        this.$router.push({
+          path:'/login'
+        })
+      })
+    },
     //头像选择
     afterRead(file) {
       // 此时可以自行将文件上传至服务器
@@ -56,12 +60,6 @@ export default {
       changeImg(file.file)
         .then(res => {
           console.log(res);
-          /* getInfo()
-            .then(res => {
-              console.log(res);
-              this.avatar = res.data.avatar;
-            }) */
-          // .catch();
         })
         .then(getInfo)
         .then(res => {
@@ -69,10 +67,8 @@ export default {
         })
         .catch();
     }
-
     //确认 取消操作
   },
-
   components: {
     [Dialog.Component.name]: Dialog.Component,
     Footer
@@ -104,38 +100,35 @@ export default {
   }
 };
 </script>
-
 <style scoped lang="less">
 .mint-button {
   margin: auto;
   margin-top: 10%;
   display: block;
 }
-
 button {
   text-align: center;
   line-height: 30px;
   margin: auto;
   width: 40%;
-
   border: 2px solid darkcyan;
 }
-
 .adatar {
   position: relative;
   margin: auto;
   margin-top: 8%;
+  border-radius: 50%;
   width: 100px;
   img {
     object-fit: cover;
-    border-radius: 50%;
     object-position: center;
-    width: 100%;
-    height: 100%;
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
   }
   input {
     position: absolute;
+    border-radius: 50%;
     top: 0;
     right: 0;
     width: 100%;
