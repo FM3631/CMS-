@@ -1,6 +1,6 @@
 <template>
     <div>
-        <router-link :to="{name:'toTypeInfo',params:{title:item.title}}" class="container" v-for='item in newsList' :key='item.id' tag="div">
+        <router-link :to="{name:'toTypeInfo',params:{title:item.title,articleId:item.articleId}}" class="container" v-for='item in newsList' :key='item.id' tag="div">
             <div class="left">
                 <img :src="item.bannerImgUrl" alt="加载失败">
             </div>

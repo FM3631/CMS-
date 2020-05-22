@@ -22,7 +22,7 @@ export default new Router({
     routes: [
         { path: '/', redirect: '/HomeContainer' },
         { path: '/HomeContainer', component: HomeContainer },
-        { path:'/TypeInfo/:title',component:TypeInfo,name:'toTypeInfo'},
+        { path:'/TypeInfo/:title/:articleId',component:TypeInfo,name:'toTypeInfo'},
         { path:'/SearchContainer',component:SearchContainer},
         { path:'/SearchNewsList/:newsList',component:SearchNewsList},
         { path:'/SearchNewsList/:value',component:SearchNewsList,name:'toSearch'},

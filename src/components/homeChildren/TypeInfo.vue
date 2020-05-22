@@ -8,7 +8,7 @@
     </van-nav-bar>
     <h3>{{this.$route.params.title}}</h3>
 
-    <div v-html="item.content" v-for="item in getContentLsit" :key="item.id"></div>
+    <div v-html="item.content" v-for="item in getContentLsit" :key="item.id">{{item.articleId}}</div>
     <van-icon
       class="icon"
       name="like"
@@ -20,8 +20,8 @@
   </div>
 </template>
 <script>
-import { getTypeContainerList } from '../../api/httpObj.js'
-import { collectState } from '../../api/httpObj.js'
+import { getTypeContainerList } from "../../api/httpObj.js";
+import { collectState } from "../../api/httpObj.js";
 import { Toast } from "vant";
 export default {
   props: {
@@ -31,16 +31,21 @@ export default {
   data() {
     return {
       flag: true,
-      getContentLsit:[]
+      getContentLsit: []
     };
   },
-  created(){
-    getTypeContainerList(1,1,1)
-    .then(res=>{
-      // console.log(res)
-      this.getContentLsit = res.rows
-    })
-    .catch()
+  created() {
+    getTypeContainerList(1, 1, 1)
+      .then(res => {
+        // console.log(res)
+        this.getContentLsit = res.rows;
+      })
+      .catch();
+  },
+  computed: {
+    /* isCollect() {
+      return this.$store.state.isCollect;
+    } */
   },
   methods: {
     onClickLeft() {
@@ -49,27 +54,27 @@ export default {
     collect() {
       if (this.flag) {
         this.$refs.changeColor.style.color = "red";
-          
-          this.getContentLsit.forEach(item=>{
-            collectState(item.articleId)
-            .then(res=>{
-              console.log(res)
-            })
-            .catch()
+
+        // this.$store.commit('changeIsCollect',{isCollect:true})
+        // console.log(this.$route.params.articleId);
+        collectState(this.$route.params.articleId)
+          .then(res => {
+            console.log(res);
           })
+          .catch();
 
         this.flag = false;
         Toast.success("收藏成功");
       } else {
         this.$refs.changeColor.style.color = "blue";
-
-        this.getContentLsit.forEach(item=>{
-            collectState(item.articleId)
-            .then(res=>{
-              console.log(res)
+        // this.$store.commit('changeIsCollect',{isCollect:false})
+        this.getContentLsit.forEach(item => {
+          collectState(item.articleId)
+            .then(res => {
+              console.log(res);
             })
-            .catch()
-          })
+            .catch();
+        });
         this.flag = true;
         Toast.success("取消收藏");
       }
@@ -82,7 +87,7 @@ export default {
   font-size: 14px;
   text-align: center;
   padding: 0 20px;
-  .icon{
+  .icon {
     font-size: 30px;
   }
   /deep/ img {
