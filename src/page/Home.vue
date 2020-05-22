@@ -31,7 +31,9 @@
       <van-tabbar-item name="friends" icon="friends-o">
         <router-link to="/Mycontaner" tag="span">我的</router-link>
       </van-tabbar-item>
-      <van-tabbar-item name="setting" icon="setting-o">联系我们</van-tabbar-item>
+      <van-tabbar-item name="setting" icon="setting-o">
+        <router-link to="/horoscope" tag="span">星座运势</router-link>
+        </van-tabbar-item>
     </van-tabbar>
   </div>
 </template>
