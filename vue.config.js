@@ -14,7 +14,16 @@ module.exports = {
           /* pathRewrite: {
             '^/api': ''
           } */
-        }
+        },
+        '/mv': {
+          target: 'http://59.111.92.205:8089', //对应自己的接口
+          changeOrigin: true,
+        },
+        
+        '/astro': {
+          target: 'https://api.jisuapi.com', //对应自己的接口
+          changeOrigin: true,
+        },
       }
      },
   }
