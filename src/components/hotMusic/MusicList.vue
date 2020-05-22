@@ -22,6 +22,7 @@
 </template>
 <script>
 import Footer from '../homecontainer/Footer.vue'
+import { getHotList } from '../../api/videoList.js'
 export default {
   components: {
     Footer
@@ -32,16 +33,20 @@ export default {
     };
   },
   created() {
-    this.getHotList();
+    getHotList().then(res=>{
+      console.log(res)
+      this.muisicList = res.data;
+    }).catch()
+    // this.getHotList();
   },
   methods: {
-    getHotList() {
-      const hotUrl = "http://59.111.92.205:8089/mv/all";
-      this.$axios.get(hotUrl).then(res => {
-        console.log(res);
-        this.muisicList = res.data.data;
-      });
-    }
+    // getHotList() {
+    //   const hotUrl = "http://59.111.92.205:8089/mv/all";
+    //   this.$axios.get(hotUrl).then(res => {
+    //     console.log(res);
+    //     this.muisicList = res.data.data;
+    //   });
+    // }
   }
 };
 </script>
