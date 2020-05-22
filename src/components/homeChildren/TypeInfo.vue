@@ -18,6 +18,7 @@ export default {
      .content /deep/{
             font-size:14px;
             text-align: center;
+            padding: 0 20px;
       /deep/ img {width: 100%}
     }
 </style>

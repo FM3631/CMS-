@@ -1,5 +1,6 @@
 <template>
   <div>
+    
     <!-- 轮播图 -->
     <div class="loop">
       <van-swipe :autoplay="3000">
@@ -66,7 +67,5 @@ export default {
   width: 100%;
   height: 100%;
 }
-.container{
-    margin-bottom: 50px;
-}
+
 </style>

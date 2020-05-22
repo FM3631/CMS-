@@ -1,11 +1,24 @@
 <template>
   <div>
-      <h2>热门音乐</h2>
+    <!-- <h2>网易云热门MV</h2> -->
     <ul>
-      <li v-for="item in muisicList" :key="item.id">
-        <img :src="item.picUrl" alt />
-        <span>{{item.name}}</span>
-      </li>
+      
+        <li v-for="item in muisicList" :key="item.id">
+
+          <router-link :to="'/playmusic/'+item.id" tag="span">
+          <div class="div1">
+            <img :src="item.cover" alt />
+          </div>
+
+          <div class="div2">
+            <span>{{item.name}}</span>
+            <span class="span3">歌手:{{item.artistName}}</span>
+          </div>
+          </router-link>
+
+        </li>
+      
+      <router-view></router-view>
     </ul>
   </div>
 </template>
@@ -13,7 +26,7 @@
 export default {
   data() {
     return {
-      muisicList: []
+      muisicList:[]
     };
   },
   created() {
@@ -21,10 +34,10 @@ export default {
   },
   methods: {
     getHotList() {
-      const hotUrl = "http://59.111.92.205:8089/personalized/newsong";
+      const hotUrl = "http://59.111.92.205:8089/mv/all";
       this.$axios.get(hotUrl).then(res => {
-        // console.log(res);
-        this.muisicList = res.data.result;
+        console.log(res);
+        this.muisicList = res.data.data;
       });
     }
   }
@@ -34,18 +47,30 @@ export default {
 li {
   height: 80px;
   padding: 10px;
-  line-height: 80px;
+  /* line-height: 80px; */
 }
 img {
-  width: 30%;
-  height: 100%;
-  vertical-align: middle;
+  width: 100%;
 }
-li img {
+li .div1 {
+  width: 50%;
   float: left;
 }
-span{
-    
-    font-size: 22px;
+li .div2 {
+  width: 50%;
+  float: right;
+}
+span {
+  display: inline-block;
+  font-size: 12px;
+  margin-left: 14px;
+}
+.span3 {
+  color: black;
+  display: block;
+  margin-top: 10px;
+}
+h2 {
+  text-align: center;
 }
 </style>

@@ -1,36 +1,35 @@
 <template>
   <div class="person-box">
     <div>
-      <van-field
-        v-model="username"
-        name="用户名"
-        label="用户名"
-        placeholder="用户名"
-        :rules="[{ required: true, message: '请填写用户名' }]"
-      />
-       <van-field
-        v-model="text"
-        type="text"
-        name="手机号"
-        label="手机号"
-        placeholder="手机号"
-      
-      />
+      <ul>
+        <li>昵称：{{userName}}</li>
+        <li>电话：{{phonenumber}}</li>
+      </ul>
     </div>
   </div>
 </template>
 <script>
-// import { getInformation } from "../../api/httpObj";
+import { getInfo } from '../../api/httpObj.js'
 export default {
   components: {},
   data() {
     return {
-      text:'',
-       username: "",
+      userName:'',
+      phonenumber:'',
     };
   },
-  created() {},
-  methods: {}
+   created() {
+       getInfo()
+      .then(res=>{
+        console.log(res)
+        this.userName = res.data.userName
+        this.phonenumber = res.data.phonenumber
+      })
+      .catch()
+   }, 
+  methods: {
+      
+  }
 };
 </script>
 

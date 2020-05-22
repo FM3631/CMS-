@@ -10,6 +10,13 @@
         :rules="[{ required: true, message: '请填写用户名' }]"
       />
       <van-field
+        v-model="nicheng"
+        name="昵称"
+        label="昵称"
+        placeholder="昵称"
+        :rules="[{ required: true, message: '请填写用昵称' }]"
+      />
+      <van-field
         v-model="password"
         type="password"
         name="密码"
@@ -31,53 +38,68 @@
         placeholder="验证码"
         :rules="[{ required: true, message: '请填写验证码' }]"
       />
-      <button @click="getTestNum">点击获取验证码</button>
+
+
+      <button  class="but1" @click="getTestNum"><span>点击获取验证码</span></button>
+
       <div style="margin: 16px;">
         <van-button round block type="info" native-type="submit">点击注册</van-button>
       </div>
     </van-form>
     <router-link to="/login">
-      <span>已有账号，快速登录！</span>
+      <span class="span3">已有账号，快速登录！</span>
     </router-link>
   </div>
 </template>
 <script>
+import { getRegister } from '../../api/login.js'
+import { getTest } from '../../api/login.js'
 export default {
   data() {
     return {
       username: "",
       password: "",
       phoneNum: "",
-      test: ""
+      test: "",
+      nicheng:''
     };
   },
   methods: {
     onSubmit(values) {
       console.log("submit", values);
-      this.getRegister()
+      getRegister(this.username,this.password,this.phoneNum,this.test,this.nicheng)
+      .then(res=>{
+        console.log(res)
+      })
+      .catch()
     },
     getTestNum() {
-      this.getTest()
-    },
-    getRegister() {
-      const url = 
-      `http://59.111.92.205:8088/api/registry?Content-Type=application/x-www-form-urlencoded&loginName=${this.username}&userName=111111&password=${this.password}&phonenumber=${this.phoneNum}&code=${this.test}`;
-      this.$axios.post(url).then(res=>{
+      getTest(this.phoneNum)
+      .then(res=>{
         console.log(res)
-      });
+      })
+      .catch()
     },
-    getTest() {
-      const url = `http://59.111.92.205:8088/api/short-message/vcode/${this.phoneNum}`;
-      this.$axios.get(url).then(res => {
-        console.log(res);
-      });
-    }
   }
 };
 </script>
 <style scoped>
-button {
-  /* background-color:rgb(255, 251, 0); */
-  /* color: aliceblue; */
+.but1 {
+  padding: 10px;
+  font-size: 14px;
+  border: none;
+  background-color:#fff;
+  color: blue;
+  float: right;
+}
+.span3{
+  font-size: 13px;
+  padding: 20px;
+}
+span :hover{
+  color: black;
+}
+h3 {
+  text-align: center;
 }
 </style>

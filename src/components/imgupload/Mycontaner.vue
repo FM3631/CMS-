@@ -2,18 +2,16 @@
   <div>
     <!-- 头像上传 -->
     <div class="adatar">
-      <van-uploader :after-read="afterRead" />
+      <van-uploader :after-read="afterRead">
+        <img :src="avatar" alt />
+      </van-uploader>
+      <p style="font-size:12px; margin:0;">点击图片更换头像</p>
     </div>
-    <div class="choos-button" style="text-align: center;">
 
-      <!-- <router-link to="/Login" tag="div"> -->
-        <van-dialog v-model="show" title="去登陆" show-cancel-button>
-          <img style="width: 100px;" src="https://img.yzcdn.cn/vant/apple-3.jpg" />
-        </van-dialog>
-      <!-- </router-link> -->
 
+    <div class="choos-button" style="    text-align: center;">
       <router-link to="/mylove" tag="div">
-        <mt-button plain>我喜欢</mt-button>
+        <mt-button plain>我的喜欢</mt-button>
       </router-link>
       <router-link to="/personaldetails" tag="div">
         <mt-button plain>我的信息</mt-button>
@@ -21,69 +19,109 @@
       <router-link to="/changedetails" tag="div">
         <mt-button plain>修改信息</mt-button>
       </router-link>
-      <button style="margin-top: 10%;">退出登录</button>
+      <button style="margin-top: 10%;" @click="exit">退出登录</button>
     </div>
   </div>
 </template>
-
 <script>
-import { changeImg } from "../../api/httpObj";
+import { changeImg, logOut } from "../../api/httpObj.js";
+import { getInfo } from "../../api/httpObj.js";
+import { Dialog } from 'vant';
 export default {
   name: "adatar",
   data() {
     return {
-      adatar: "",
-      file: "",
-      show: true,
+      avatar: "",
+      show: false
     };
   },
+  created() {
+    getInfo()
+      .then(res => {
+        console.log(res);
+        this.avatar = res.data.avatar;
+      })
+      .catch();
+  },
   methods: {
+    exit(){
+      logOut().then(res=>{
+        console.log(res)
+        this.$router.push({
+          path:'/login'
+        })
+      })
+    },
     //头像选择
     afterRead(file) {
       // 此时可以自行将文件上传至服务器
-      // console.log(file);
+      console.log(file);
       changeImg(file.file)
         .then(res => {
           console.log(res);
         })
+        .then(getInfo)
+        .then(res => {
+          this.avatar = res.data.avatar;
+        })
         .catch();
     }
+    //确认 取消操作
+  },
+  components: {
+    [Dialog.Component.name]: Dialog.Component
+  },
+  computed:{
+    changeCode(){
+        return this.$store.state.code
+    }
+  },
+  mounted() {
+    Dialog
+      .confirm({
+        title: "您还没有登陆，请登录",
+        // message: "弹窗内容"
+      })
+      .then(() => {
+        // on confirm
+        if(this.$store.state.code == 0){this.show = false}
+        this.$router.push('/login')
+      })
+      .catch(() => {
+        // on cancel
+      });
   }
 };
 </script>
-
 <style scoped lang="less">
 .mint-button {
   margin: auto;
   margin-top: 10%;
   display: block;
 }
-
 button {
   text-align: center;
   line-height: 30px;
   margin: auto;
   width: 40%;
-
   border: 2px solid darkcyan;
 }
-
 .adatar {
   position: relative;
   margin: auto;
-  margin-top: 20%;
+  margin-top: 8%;
+  border-radius: 50%;
   width: 100px;
-  height: 100px;
   img {
     object-fit: cover;
-    border-radius: 50%;
     object-position: center;
-    width: 100%;
-    height: 100%;
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
   }
   input {
     position: absolute;
+    border-radius: 50%;
     top: 0;
     right: 0;
     width: 100%;

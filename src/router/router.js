@@ -11,6 +11,7 @@ import SearchNewsList from '../components/search/SearchNewsList.vue'
 import Login from '../components/login-register/Login.vue'
 import Register from '../components/login-register/Register.vue'
 import MusicList from '../components/hotMusic/MusicList.vue'
+import PlayMusic from '../components/hotMusic/PlayMusic.vue'
 
 import Mycontaner from '../components/imgupload/Mycontaner.vue'
 import mylove from '../components/mycenter/Mylove.vue'
@@ -24,11 +25,13 @@ export default new Router({
         { path: '/HomeContainer', component: HomeContainer },
         { path:'/TypeInfo/:title/:content',component:TypeInfo,name:'toTypeInfo'},
         { path:'/SearchContainer',component:SearchContainer},
-        { path:'/SearchNewsList/:newsList',component:SearchNewsList,name:'toSearch'},
+        { path:'/SearchNewsList/:newsList',component:SearchNewsList},
+        { path:'/SearchNewsList/:value',component:SearchNewsList,name:'toSearch'},
 
         {path:'/login',component:Login,},
         {path:'/register',component:Register,},
         {path:'/hotmusic',component:MusicList,},
+        {path:'/playmusic/:id',component:PlayMusic,},
 
         { path: '/Mycontaner', component: Mycontaner },
         { path: '/mylove', component: mylove },
