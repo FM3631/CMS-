@@ -42,7 +42,7 @@ export default {
 video{
   object-fit:fill;
   width: 100%;
-  height: 230px;
+  height: 180px;
 }
 p{
   font-size: 16px;
