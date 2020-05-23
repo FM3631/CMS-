@@ -29,7 +29,7 @@ export default {
   },
   methods: {
     getHor() {
-      const url = "/astro/all?appkey=cd8e59291d605601&astroid";
+      const url = "/astro/all?appkey=4611be01cc440879&astroid";
       this.$axios
         .get(url)
         .then(res => {

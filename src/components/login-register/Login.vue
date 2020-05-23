@@ -2,7 +2,7 @@
   <div>
     <h3>用户登录</h3>
     <van-form @submit="onSubmit">
-      <van-field
+      <van-field 
         v-model="username"
         name="用户名"
         label="用户名"
@@ -29,6 +29,9 @@
         <van-button round block type="info" native-type="submit">快速登录</van-button>
         <router-link to="/register">
           <span class="span2">还没有账号？点击注册</span>
+        </router-link>
+        <router-link to="/removepassword">
+          <span class="span2 span3">忘记密码</span>
         </router-link>
       </div>
     </van-form>
@@ -72,5 +75,8 @@ h3 {
   display: inline-block;
   padding: 10px;
   font-size: 13px;
+}
+.span3 {
+ float: right;
 }
 </style>

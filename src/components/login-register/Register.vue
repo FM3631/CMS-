@@ -25,6 +25,13 @@
         :rules="[{ required: true, message: '请填写密码' }]"
       />
       <van-field
+        v-model="email"
+        name="email"
+        label="email"
+        placeholder="email"
+        :rules="[{ required: true, message: '请填写邮箱' }]"
+      />
+      <van-field
         v-model="phoneNum"
         name="手机号"
         label="手机号"
@@ -60,14 +67,16 @@ export default {
       username: "",
       password: "",
       phoneNum: "",
+      
       test: "",
-      nicheng:''
+      nicheng:'',
+      email:"",
     };
   },
   methods: {
     onSubmit(values) {
       console.log("submit", values);
-      getRegister(this.username,this.password,this.phoneNum,this.test,this.nicheng)
+      getRegister(this.username,this.password,this.phoneNum,this.test,this.email,this.nicheng)
       .then(res=>{
         console.log(res)
       })
