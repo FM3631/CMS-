@@ -1,33 +1,41 @@
 <template>
-  <div>
+  <div class="mycontaner">
+    <van-nav-bar title="个人中心" />
     <!-- 头像上传 -->
-    <div class="adatar">
-      <van-uploader :after-read="afterRead">
-        <img :src="avatar" alt />
-      </van-uploader>
-      <p style="font-size:12px; margin:0;">点击图片更换头像</p>
-    </div>
-
-    <div class="choos-button" style="    text-align: center;">
+    <van-cell-group>
+      <div class="adatar">
+      <img :src="avatar" alt />
+      </div>
+    </van-cell-group>
+    <div class="middle-details">
+      <!-- 我的喜欢 -->
       <router-link to="/MyCollect" tag="div">
-        <mt-button plain>我的收藏</mt-button>
+        <van-cell title="我的喜欢" is-link />
       </router-link>
+
       <router-link to="/MyLook" tag="div">
-        <mt-button plain>我的订阅</mt-button>
+        <van-cell title="我的订阅" is-link />
       </router-link>
+
+      <!-- 查看个人信息 -->
+
       <router-link to="/personaldetails" tag="div">
-        <mt-button plain>我的信息</mt-button>
+        <van-cell title="我的信息" is-link />
       </router-link>
+      <!-- 修改信息 -->
       <router-link to="/changedetails" tag="div">
-        <mt-button plain>修改信息</mt-button>
+        <van-cell title="修改信息" is-link />
       </router-link>
-      <button style="margin-top: 10%;" @click="exit">退出登录</button>
+    </div>
+    <div class="choos-button">
+      <button  @click="exit">退出登录</button>
     </div>
     <Footer></Footer>
   </div>
 </template>
 <script>
-import { changeImg, logOut } from "../../api/httpObj.js";
+// import { changeImg, logOut } from "../../api/httpObj.js";
+import { logOut } from "../../api/httpObj.js";
 import { getInfo } from "../../api/httpObj.js";
 import Footer from "../homecontainer/Footer.vue";
 import { Dialog } from "vant";
@@ -48,27 +56,13 @@ export default {
       .catch();
   },
   methods: {
-    exit(){
-      logOut().then(res=>{
-        console.log(res)
+    exit() {
+      logOut().then(res => {
+        console.log(res);
         this.$router.push({
-          path:'/login'
-        })
-      })
-    },
-    //头像选择
-    afterRead(file) {
-      // 此时可以自行将文件上传至服务器
-      console.log(file);
-      changeImg(file.file)
-        .then(res => {
-          console.log(res);
-        })
-        .then(getInfo)
-        .then(res => {
-          this.avatar = res.data.avatar;
-        })
-        .catch();
+          path: "/login"
+        });
+      });
     }
     //确认 取消操作
   },
@@ -104,29 +98,28 @@ export default {
 };
 </script>
 <style scoped lang="less">
-.mint-button {
-  margin: auto;
+.choos-button {
   margin-top: 10%;
-  display: block;
-}
-button {
-  text-align: center;
-  line-height: 30px;
-  margin: auto;
-  width: 40%;
-  border: 2px solid darkcyan;
+  button {
+    text-align: center;
+    line-height: 30px;
+    width: 100%;
+    margin: auto;
+    background: red;
+    border: 2px solid darkcyan;
+  }
 }
 .adatar {
   position: relative;
   margin: auto;
-  margin-top: 8%;
-  border-radius: 50%;
-  width: 100px;
+  margin-top: 5%;
+  width: 80px;
+  height: 80px;
   img {
     object-fit: cover;
     object-position: center;
-    width: 100px;
-    height: 100px;
+    width: 100%;
+    height: 100%;
     border-radius: 50%;
   }
   input {
@@ -143,5 +136,15 @@ button {
       box-shadow: none;
     }
   }
+}
+.mycontaner {
+  padding: none;
+  background: rgb(247, 247, 246);
+  width: 100%;
+  height: 100%;
+  // background: blue;
+}
+.van-cell {
+  margin-top: 10px;
 }
 </style>

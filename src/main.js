@@ -20,9 +20,11 @@ Vue.use(VueAxios, http)
 
 //引入vant库
 
-import { PullRefresh,List,Toast,NavBar,Icon,Tabbar, TabbarItem,Swipe, SwipeItem,Lazyload,Tab, Tabs,Search,Tag,Form,Field,Button,Uploader,Divider,Dialog } from 'vant';
 
+import { PullRefresh,List,Toast,NavBar,Icon,Tabbar, TabbarItem,Swipe, SwipeItem,Lazyload,Tab, Tabs,Search,Tag,Form,Field,Button,Uploader,Divider,Dialog,Cell,CellGroup  } from 'vant';
 // 全局注册
+Vue.use(Cell);
+Vue.use(CellGroup);
 Vue.use(PullRefresh);
 Vue.use(List);
 Vue.use(Tabbar);
