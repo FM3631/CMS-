@@ -6,7 +6,7 @@ export default new Vuex.Store({
   state: {
     isLogin: false,
     loginPromise: null,
-    isCollect: false
+    look:''
   },
   mutations: {
     //登陆状态
@@ -17,9 +17,9 @@ export default new Vuex.Store({
     changeLoginPromise(state, { loginPromise }) {
       state.loginPromise = loginPromise
     },
-    //是否收藏
-    changeIsCollect(state, {isCollect}) {
-      state.isCollect = isCollect
+    //订阅列表
+    changeLook(state,{look}){
+      state.look = look
     }
   },
   actions: {}

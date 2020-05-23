@@ -12,6 +12,9 @@
       <router-link to="/MyCollect" tag="div">
         <mt-button plain>我的收藏</mt-button>
       </router-link>
+      <router-link to="/MyLook" tag="div">
+        <mt-button plain>我的订阅</mt-button>
+      </router-link>
       <router-link to="/personaldetails" tag="div">
         <mt-button plain>我的信息</mt-button>
       </router-link>

@@ -7,6 +7,7 @@ import HomeContainer from '../components/homecontainer/HomeContainer.vue'
 import TypeInfo from '../components/homeChildren/TypeInfo.vue'
 import SearchContainer from '../components/search/SearchContainer.vue'
 import SearchNewsList from '../components/search/SearchNewsList.vue'
+import MyLook from '../components/mycenter/MyLook.vue'
 
 import Login from '../components/login-register/Login.vue'
 import Register from '../components/login-register/Register.vue'
@@ -28,6 +29,7 @@ export default new Router({
         { path:'/SearchContainer',component:SearchContainer},
         { path:'/SearchNewsList/:newsList',component:SearchNewsList},
         { path:'/SearchNewsList/:value',component:SearchNewsList,name:'toSearch'},
+        { path:'/MyLook',component:MyLook},
 
         {path:'/login',component:Login,},
         {path:'/register',component:Register,},

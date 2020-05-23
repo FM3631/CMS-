@@ -8,7 +8,7 @@
     />
 
     <router-link
-      :to="{name:'toTypeInfo',params:{title:item.title}}"
+      :to="{name:'toTypeInfo',params:{title:item.title,articleId:item.articleId}}"
       class="container"
       v-for="item in collectList"
       :key="item.id"

@@ -40,6 +40,13 @@ export default {
       typeListrows: [],
     };
   },
+
+  //监听订阅列表
+  computed:{
+    look(){
+        return this.$store.state.look
+    }
+  },
   //获取轮播图
   created() {
     // this.getCategoryId();
@@ -47,6 +54,7 @@ export default {
       .then(res => {
         // console.log(res);
         this.loopListrows = res.rows;
+        this.$store.commit('changeLook',{look:this.loopListrows})
       })
       .catch();
 
@@ -57,6 +65,8 @@ export default {
       })
       .catch();
   },
+
+  
   methods: {
     
   }

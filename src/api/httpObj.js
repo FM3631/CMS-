@@ -25,6 +25,12 @@ function getTypeContainerList(pageNum = 0, pageSize = 0, categoryId) {
     const typeContainerListUrl = `/api/cms/article/open/list`
     return http.post(typeContainerListUrl, formData);
 }
+
+//获取新闻详情接口
+function getNewsInfo(articleId){
+    const newsInfoUrl = `/api/cms/article/open/detail/${articleId}`
+    return http.get(newsInfoUrl)
+}
 //获取搜索接口
 function getSearchList(pageNum = 0, pageSize = 5, value) {
     const formData = new FormData();
@@ -82,6 +88,19 @@ function changeinfo( userName,phonenumber) {
     return http.get(urlOut)
 
 }
+
+//订阅接口
+function subScribe(categoryIds){
+    const formData = new FormData()
+    formData.append('categoryIds',categoryIds)
+    const subScribeUrl = `/api/cms/userCategory/subscription/category`
+    return http.post(subScribeUrl,formData)
+}
+//订阅列表接口
+function getSubScribeList(){
+    const subScribeListUrl = `/api/cms/category/subscription/list`
+    return http.get(subScribeListUrl)
+}
 // 这是一个普通导出，默认导出只能导出一个
 export {
     getLoopList,
@@ -93,8 +112,10 @@ export {
     getInfo,
     collectState,
     collectStateList,
-
     changeinfo,
-    logOut
+    logOut,
+    subScribe,
+    getNewsInfo,
+    getSubScribeList
 
 }
