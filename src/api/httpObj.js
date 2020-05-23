@@ -70,9 +70,10 @@ function collectStateList() {
     return http.get(collectStateListUrl);
 }
 //修改信息接口
-function changeinfo( userName,phonenumber) {
+function changeinfo( userName,phonenumber,email) {
     const formData = new FormData();
     formData.append('userName', userName)
+    formData.append('email', email)
     formData.append('phonenumber', phonenumber)
     const changeInfoUrl = `/api/system/user/profile/update`
     return http.post(changeInfoUrl, formData);
