@@ -8,9 +8,9 @@
       </div>
     </van-cell-group>
     <div class="middle-details">
-      <!-- 我的收藏 -->
+      <!-- 我的喜欢 -->
       <router-link to="/MyCollect" tag="div">
-        <van-cell title="我的收藏" is-link />
+        <van-cell title="我的喜欢" is-link />
       </router-link>
       <!-- 查看个人信息 -->
       <router-link to="/personaldetails" tag="div">
