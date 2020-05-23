@@ -55,10 +55,15 @@ export default {
       getLogin(this.username, this.password)
         .then(res => {
           console.log(res);
-          
+          if(res.code == 0){
+            this.$router.push("/HomeContainer");
+          }else{
+            alert('用户名或密码错误')
+          }
         })
         .catch();
-      this.$router.push("/HomeContainer");
+      // 
+      
     }
   }
 };
