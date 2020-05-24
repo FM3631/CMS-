@@ -1,11 +1,11 @@
 <template>
   <div class="person-box">
-     <van-nav-bar title="修改信息" left-text="返回"  @click-left="onClickLeft"  />
+    <van-nav-bar title="修改信息" left-text="返回" @click-left="onClickLeft" />
     <div class="adatar">
       <van-uploader :after-read="afterRead">
         <img :src="avatar" alt />
       </van-uploader>
-      <p style="font-size:12px; margin:0;">点击图片更换头像</p>
+              <p style="text-align: center;font-size: 12px;">点击上方上传修改图片</p>
     </div>
     <div class="change-info">
       <van-form @submit="onSubmit">
@@ -33,7 +33,7 @@
           :rules="[{ required: true, message: '请填写邮箱' }]"
         />
         <div style="margin: 16px;">
-          <van-button round block type="info" native-type="submit"  @click.native="handleClick">提交</van-button>
+          <van-button round block type="info" native-type="submit" @click.native="handleClick">提交</van-button>
         </div>
       </van-form>
     </div>
@@ -57,11 +57,29 @@ export default {
       .then(res => {
         console.log(res);
         this.avatar = res.data.avatar;
+        if (this.code === 0) {
+          this.$toast({
+            avatar: "../../asstes/1.jpg"
+          });
+        }
       })
       .catch();
   },
   methods: {
     afterRead(file) {
+      // 此时可以自行将文件上传至服务器
+      console.log(file);
+      changeImg(file.file)
+        .then(res => {
+          console.log(res);
+        })
+        .then(getInfo)
+        .then(res => {
+          this.avatar = res.data.avatar;
+        })
+        .catch();
+    },
+    changeAvatar(file) {
       // 此时可以自行将文件上传至服务器
       console.log(file);
       changeImg(file.file)
@@ -87,37 +105,47 @@ export default {
         .catch();
       this.$router.push("/personaldetails");
     },
-    onClickLeft(){
-       this.$router.go(-1)
+    onClickLeft() {
+      this.$router.go(-1);
     }
   }
 };
 </script>
+<style >
+.van-uploader__input-wrapper {
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+</style>
 <style scoped lang="less">
 .person-box {
-      
+  .change-info {
+  width: 100%;
+  height: 100px;
+  text-align: center;
+}
   .adatar {
     position: relative;
     margin: auto;
+    text-align: center;
     margin-top: 8%;
-    border-radius: 50%;
-    width: 100px;
+    width: 100%;
     img {
       object-fit: cover;
       object-position: center;
-      width: 100px;
-      height: 100px;
+      width: 80px;
+      height: 80px;
       border-radius: 50%;
     }
     input {
       position: absolute;
-      border-radius: 50%;
       top: 0;
       right: 0;
-      width: 100%;
-      height: 100%;
+      width: 80px;
+      height: 80px;
       outline: none;
-      opacity: 0;
+      opacity: 1;
       cursor: pointer;
       &:focus {
         box-shadow: none;
@@ -136,10 +164,5 @@ ul {
     border-bottom: 1px solid #ccc;
   }
 }
-.change-info {
-padding: 10% 0;
-    width: 100%;
-    height: 100px;
-    text-align: center;
-}
+
 </style>
