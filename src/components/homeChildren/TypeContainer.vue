@@ -23,6 +23,7 @@
 </template>
 <script>
 import { getTypeContainerList } from "../../api/httpObj.js";
+
 export default {
   data() {
     return {
@@ -34,6 +35,11 @@ export default {
   props: {
     categoryId: [String, Number]
   },
+  computed:{
+    look(){
+      return this.$store.state.look
+    }
+  },
   created() {
     //获取新闻列表
     this.onRefresh()
@@ -42,10 +48,12 @@ export default {
     onRefresh() {
        getTypeContainerList(this.pageNum, 10, this.categoryId)
       .then(res => {
-        //   console.log(res);
+          console.log(res);
         this.newsList = res.rows;
       })
       .catch();
+     
+      
       this.refreshing = false;
       
       console.log(this.pageNum);

@@ -6,7 +6,7 @@ export default new Vuex.Store({
   state: {
     isLogin: false,
     loginPromise: null,
-    look:''
+    look:[]
   },
   mutations: {
     //登陆状态

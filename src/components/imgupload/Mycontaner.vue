@@ -79,7 +79,7 @@ export default {
     }
   },
   mounted() {
-    this.loginPromise.then(() => {
+    /* this.loginPromise.then(() => {
       if (!this.isLogin) {
         Dialog.confirm({
           title: "您还没有登陆，请登录"
@@ -93,7 +93,7 @@ export default {
             // on cancel
           });
       }
-    });
+    }); */
   }
 };
 </script>

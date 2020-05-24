@@ -26,6 +26,7 @@
 import Header from './Header.vue'
 // import Footer from './Footer.vue'
 import TypeContainer from "../homeChildren/TypeContainer.vue";
+import { getSubScribeList } from "../../api/httpObj.js";
 import { getLoopList } from "../../api/httpObj.js";
 import { getTypeList } from "../../api/httpObj.js";
 export default {
@@ -57,13 +58,28 @@ export default {
         this.$store.commit('changeLook',{look:this.loopListrows})
       })
       .catch();
-
-    //获取分类列表
-    getTypeList()
+       //订阅列表
+    if(this.$store.state.isLogin == false){
+        getTypeList()
       .then(res => {
         this.typeListrows = res.rows;
       })
       .catch();
+    }/* else if(this.typeListrows == null && this.$store.state.isLogin == true){
+        getTypeList()
+      .then(res => {
+        this.typeListrows = res.rows;
+      })
+      .catch();
+    } */
+    else{
+      getSubScribeList()
+      .then(res => {
+        console.log(res);
+          this.typeListrows = res.rows;
+      })
+      .catch();
+    }
   },
 
   

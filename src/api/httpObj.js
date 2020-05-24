@@ -93,6 +93,8 @@ function changeinfo( userName,phonenumber,email) {
 //订阅接口
 function subScribe(categoryIds){
     const formData = new FormData()
+    // eslint-disable-next-line no-debugger
+    // debugger
     formData.append('categoryIds',categoryIds)
     const subScribeUrl = `/api/cms/userCategory/subscription/category`
     return http.post(subScribeUrl,formData)
