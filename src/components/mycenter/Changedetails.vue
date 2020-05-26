@@ -33,7 +33,7 @@
           :rules="[{ required: true, message: '请填写邮箱' }]"
         />
         <div style="margin: 16px;">
-          <van-button round block type="info" native-type="submit" @click.native="handleClick">提交</van-button>
+          <van-button round block type="info" native-type="submit" @click.native="handleClick">点击修改</van-button>
         </div>
       </van-form>
     </div>
@@ -43,6 +43,7 @@
 import { changeinfo } from "../../api/httpObj.js";
 import { changeImg } from "../../api/httpObj.js";
 import { getInfo } from "../../api/httpObj.js";
+import { Toast } from 'vant'
 export default {
   data() {
     return {
@@ -99,11 +100,10 @@ export default {
       changeinfo(this.userName, this.phone, this.email)
         .then(res => {
           console.log(res);
-          // this.lohh = res.data.loginName
-          // console.log(res.data.userName)
+          Toast('修改成功')
         })
         .catch();
-      this.$router.push("/personaldetails");
+      // this.$router.push("/personaldetails");
     },
     onClickLeft() {
       this.$router.go(-1);
