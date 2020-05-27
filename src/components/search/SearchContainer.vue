@@ -25,7 +25,7 @@
       <div class="hotSearch">
         <p>实时热搜</p>
         <router-link
-          :to="{name:'toTypeInfo',params:{title:item.title,content:item.content}}"
+          :to="{name:'toTypeInfo',params:{title:item.title,articleId:item.articleId}}"
           v-for="item in hotSearchList"
           :key="item.id"
           style="margin: 8px;color:#9c27b0"

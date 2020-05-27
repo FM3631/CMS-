@@ -2,7 +2,7 @@
   <div>
     <Header></Header>
     <router-link
-      :to="{name:'toTypeInfo',params:{title:item.title,content:item.content}}"
+      :to="{name:'toTypeInfo',params:{title:item.title,articleId:item.articleId}}"
       class="container"
       v-for="item in newsList"
       :key="item.id"
