@@ -105,7 +105,7 @@ export default {
     line-height: 30px;
     width: 100%;
     margin: auto;
-    background: red;
+    background: #3b74c7;
     border: 2px solid darkcyan;
   }
 }
