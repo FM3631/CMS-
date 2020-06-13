@@ -55,13 +55,16 @@ export default {
       })
       .catch();
   },
+
+  //路由守卫
   methods: {
     exit() {
       logOut().then(res => {
         console.log(res);
+        this.$store.commit('changeIsLogin',{ isLogin:!this.isLogin })
         this.$router.push({
           path: "/login"
-        });
+        })
       });
     }
     //确认 取消操作

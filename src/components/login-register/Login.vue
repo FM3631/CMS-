@@ -9,13 +9,6 @@
         placeholder="用户名"
         :rules="[{ required: true, message: '请填写用户名' }]"
       />
-      <!-- <van-field
-        v-model="nicheng"
-        name="昵称"
-        label="昵称"
-        placeholder="昵称"
-        :rules="[{ required: true, message: '请填写用昵称' }]"
-      /> -->
       <van-field
         v-model="password"
         type="password"
@@ -49,6 +42,9 @@ export default {
     };
   },
   created() {},
+  computed:{
+    isLogin(){return this.$store.state.isLogin}
+  },
   methods: {
     onSubmit(values) {
       console.log("submit", values);
@@ -57,6 +53,7 @@ export default {
           console.log(res);
           if(res.code == 0){
             this.$router.push("/HomeContainer");
+            this.$store.commit('changeIsLogin',{ isLogin:!this.isLogin })
           }else{
             alert('用户名或密码错误')
           }

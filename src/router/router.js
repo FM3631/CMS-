@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import store from '../store/index'
 Vue.use(Router)
 
 
@@ -23,29 +24,45 @@ import personaldetails from '../components/mycenter/Personaldetails.vue'
 import changedetails from '../components/mycenter/Changedetails.vue'
 
 
-export default new Router({
+const router = new Router({
     routes: [
         { path: '/', redirect: '/HomeContainer' },
         { path: '/HomeContainer', component: HomeContainer },
-        { path:'/TypeInfo/:title/:articleId',component:TypeInfo,name:'toTypeInfo'},
-        { path:'/SearchContainer',component:SearchContainer},
-        { path:'/SearchNewsList/:newsList',component:SearchNewsList},
-        { path:'/SearchNewsList/:value',component:SearchNewsList,name:'toSearch'},
-        { path:'/MyLook',component:MyLook},
+        { path: '/TypeInfo/:title/:articleId', component: TypeInfo, name: 'toTypeInfo' },
+        { path: '/SearchContainer', component: SearchContainer },
+        { path: '/SearchNewsList/:newsList', component: SearchNewsList },
+        { path: '/SearchNewsList/:value', component: SearchNewsList, name: 'toSearch' },
+        { path: '/MyLook', component: MyLook },
 
-        {path:'/login',component:Login,},
-        {path:'/removepassword',component:RemovePassword},
-        {path:'/register',component:Register,},
-        {path:'/hotmusic',component:MusicList,},
-        {path:'/playmusic/:id',component:PlayMusic,},
-        {path:'/horoscope',component:Horoscope,},
-        {path:'/xzson/:astroid',component:XzSon,},
+        { path: '/login', component: Login, },
+        { path: '/removepassword', component: RemovePassword },
+        { path: '/register', component: Register, },
+        { path: '/hotmusic', component: MusicList, },
+        { path: '/playmusic/:id', component: PlayMusic, },
+        { path: '/horoscope', component: Horoscope, },
+        { path: '/xzson/:astroid', component: XzSon, },
 
-        { path: '/Mycontaner', component: Mycontaner },
+        { path: '/Mycontaner', component: Mycontaner, meta: { isLogin: true } },
         { path: '/MyCollect', component: MyCollect },
         { path: '/personaldetails', component: personaldetails },
         { path: '/changedetails', component: changedetails },
-    ]
+    ],
+
 })
 
+router.beforeEach((to, from, next) => {
+    if (to.meta.isLogin) {
+        // debugger
+        if (store.state.isLogin) {
+            next()
+        } else {
+            next('/login')
+        }
+    } else {
+        next()
+    }
+
+})
+
+export default router
 
