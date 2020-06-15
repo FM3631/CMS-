@@ -46,7 +46,7 @@ export default {
     }
   },
   created() {
-    //新闻 订阅 。。。列表
+    //新闻 订阅列表
     getTypeList(0, 10)
       .then(res => {
         console.log(res);

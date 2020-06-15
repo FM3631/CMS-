@@ -81,23 +81,6 @@ export default {
       return this.$store.state.loginPromise;
     }
   },
-  mounted() {
-    /* this.loginPromise.then(() => {
-      if (!this.isLogin) {
-        Dialog.confirm({
-          title: "您还没有登陆，请登录"
-          // message: "弹窗内容"
-        })
-          .then(() => {
-            // on confirm
-            this.$router.push("/login");
-          })
-          .catch(() => {
-            // on cancel
-          });
-      }
-    }); */
-  }
 };
 </script>
 <style scoped lang="less">

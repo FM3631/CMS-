@@ -59,19 +59,17 @@ export default {
       })
       .catch();
        //订阅列表
-    if(this.$store.state.isLogin == false){
+       // eslint-disable-next-line no-debugger
+      //  debugger
+    this.$store.state.loginPromise.then(()=>{
+      if(this.$store.state.isLogin == false){
         getTypeList()
       .then(res => {
+        console.log(res)
         this.typeListrows = res.rows;
       })
       .catch();
-    }/* else if(this.typeListrows == null && this.$store.state.isLogin == true){
-        getTypeList()
-      .then(res => {
-        this.typeListrows = res.rows;
-      })
-      .catch();
-    } */
+    }
     else{
       getSubScribeList()
       .then(res => {
@@ -80,6 +78,8 @@ export default {
       })
       .catch();
     }
+    })
+    
   },
 
   
